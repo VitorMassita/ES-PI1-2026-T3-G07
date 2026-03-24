@@ -3,27 +3,37 @@ while True:
         print("\n1 - Gerenciamento \n2 - Votação")
         escolha = int(input("Escolha a opção desejada: "))
         if escolha == 1:
-            print("Gerenciamento")
+            print("Gerenciamento \n")
             while True:
                 try:
-                    print("\n1 - Candidatos \n2 - Eleitores")
+                    print("0 - Voltar \n1 - Candidatos \n2 - Eleitores")
                     escolha = int(input("Escolha a opção desejada: "))
-                    if escolha == 1:
-                        print("Candidatos")
+                    if escolha == 0: 
+                        print("Voltando..." )
+                        break
+                    elif escolha == 1:
+                        print("Candidatos \n")
                         while True:
                             try:
-                                print("\n1 - Edição de Dados\n2 - Cadastramento\n3 - Remoção \n4 - Busca de Candidatos \n5 - Candidatos \n0 - Voltar")
+                                print("0 - Voltar \n1 - Edição de Dados\n2 - Cadastramento\n3 - Remoção \n4 - Busca de Candidatos \n5 - Candidatos ")
                                 escolha = int(input("Escolha a opção desejada: "))
                                 if escolha == 0 :
-                                    
                                     print("Voltando..." )
                                 elif escolha == 1:
                                     print("Edição de Dados")
                                     break    
                                 elif escolha == 2:
-                                    print("Eleitores")
+                                    print("Cadastramento")
                                     break
-                                    print("Opção inválida, tente novamente.")
+                                elif escolha == 3:
+                                    print("Remoção")
+                                    break
+                                elif escolha == 4:
+                                    print("Busca de Candidatos")
+                                    break
+                                elif escolha == 5:
+                                    print("Lista de Candidatos")
+                                    break
                             except ValueError:
                                 print("Entrada inválida. Digite um número.")
                     elif escolha == 2:
