@@ -1,6 +1,5 @@
 """Edição de Dados"""
 import CondicoesGlobais as estado
-import menu_principal as main
 import Menu_Candidatos as ct
 
 def menu_edicaodados_func():

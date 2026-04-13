@@ -1,8 +1,9 @@
 """Menu Eleitores"""
 import CondicoesGlobais as estado
 
+
 def menu_eleitores_func():
-    import Menu_Gerenciamento as gr
+   
     while estado.menu_gerenciamento == 2:
         try:
             print("\n0 - Voltar\n1 - Lista de Eleitores\n2 - Remoção de Eleitores \n3 - Busca de Eleitores \n4 - Edição de Dados \n5 - Cadastramento")

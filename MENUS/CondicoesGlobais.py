@@ -1,4 +1,8 @@
 """Condiçoes Globais"""
+
+#import Menu_Gerenciamento as gr
+#import Menu_Votacao as vt
+
 menu_principal = -1  
 menu_gerenciamento = -1  
 menu_votacao = -1  

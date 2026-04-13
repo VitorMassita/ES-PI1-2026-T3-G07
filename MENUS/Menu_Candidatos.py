@@ -1,8 +1,9 @@
 """Menu Candidatos"""
 import CondicoesGlobais as estado
+import Menu_Gerenciamento as gr
+import Menu_EdicaoDados as ed
 def menu_candidatos_func():
-    import Menu_Gerenciamento as gr
-    import Menu_EdicaoDados as ed
+    
     while estado.menu_gerenciamento == 1:
         try:
             print("\n0 - Voltar\n1 - Lista de Candidatosn \n2 - Remoção de Candidatos \n3 - Busca de Candidatos \n4 - Edição de Dados \n5 - Cadastramento")

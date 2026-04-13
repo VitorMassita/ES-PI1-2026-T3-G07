@@ -3,15 +3,19 @@
 
 """Menu Principal"""
 import CondicoesGlobais as estado
+import Menu_Gerenciamento as gr
+import Menu_Votacao as vt
 
-def menu_principal_func():  
-    import Menu_Gerenciamento as gr
-    import Menu_Votacao as vt
 
+
+
+def menu_principal_func(): 
+    estado.menu_principal = -1 
     while estado.menu_principal != 0:
         try:
             print("\n0 - Encerrar \n1 - Gerenciamento \n2 - Votação")
             estado.menu_principal = int(input("Escolha a opção desejada: "))
+
             match estado.menu_principal:
                 case 0:
                     print("Encerrando...")
@@ -21,7 +25,7 @@ def menu_principal_func():
                     gr.menu_gerenciamento_func()
                     break
                 case 2:
-                    print("Votação")
+                    print("\n Votação")
                     vt.menu_votacao_func()
                     break
                 case _:
