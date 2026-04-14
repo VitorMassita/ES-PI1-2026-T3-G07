@@ -10,7 +10,7 @@ def menu_candidatos_func():
     
     while estado.menu_gerenciamento == 1:
         try:
-            print("\n0 - Voltar\n1 - Lista de Candidatosn \n2 - Remoção de Candidatos \n3 - Busca de Candidatos \n4 - Edição de Dados \n5 - Cadastramento")
+            print("\n0 - Voltar\n1 - Lista de Candidatos \n2 - Remoção de Candidatos \n3 - Busca de Candidatos \n4 - Edição de Dados \n5 - Cadastramento")
             estado.menu_candidatos= int(input("Escolha a opção desejada: "))
             match estado.menu_candidatos:
                 case 0:
