@@ -86,6 +86,7 @@ def validacao_tituloeleitor_func():
     estado_cod = str(e9 + e10) #Juntando os dígitos e9 e e10 em uma só string
 
     #Dicionário para guardar sigla do estado para cada digito de estado
+    
     estados = {
         "01": "SP", "02": "MG", "03": "RJ", "04": "RS",
         "05": "BA", "06": "PR", "07": "CE", "08": "PE",
@@ -95,53 +96,14 @@ def validacao_tituloeleitor_func():
         "21": "SE", "22": "AM", "23": "RO", "24": "AC",
         "25": "AP", "26": "RR", "27": "TO", "28": "ZZ",
         }
-    
-    # Verificando se o estado existe na lista
-    if estado_cod not in estados: # SE o código dos estados NÃO ESTÁ no dict
+
+     # Verificando se o estado existe na lista
+    if (estado_cod not in estados): # SE o código dos estados NÃO ESTÁ no dict
         print("Estado inválido")
 
     estado = estados[estado_cod] # Definindo o estado para o conjunto de números recebidos
 
-        # =========================
-    # 🔢 1º Dígito Verificador
-    # =========================
-    soma1 = (
-        n1*2 + n2*3 + n3*4 + n4*5 +
-        n5*6 + n6*7 + n7*8 + n8*9
-    )
-
-    dv1 = soma1 % 11
-
-    if dv1 == 10:
-        dv1 = 0
-
-    if dv1 == 0 and estado_cod in ["01", "02"]:
-        dv1 = 1
-
-    # =========================
-    # 🔢 2º Dígito Verificador
-    # =========================
-    soma2 = (
-        int(e9)*7 +
-        int(e10)*8 +
-        dv1*9
-    )
-
-    dv2 = soma2 % 11
-
-    if dv2 == 10:
-        dv2 = 0
-
-    if dv2 == 0 and estado_cod in ["01", "02"]:
-        dv2 = 1
-
-    # =========================
-    # ✅ Validação final
-    # =========================
-    if dv1 == d11 and dv2 == d12:
-        print(f"Título válido! Estado: {estado}")
-    else:
-        print("Título inválido!")
-
+    # Verificação de dígito
+    # Aqui será feito o código de verificação 
 
 validacao_tituloeleitor_func()
