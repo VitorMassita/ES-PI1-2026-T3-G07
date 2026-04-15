@@ -1,12 +1,15 @@
 import CondicoesGlobais as estado
 
-
+# Validação do CPF do usuário
 def validacao_cpf_func():   
         cpf = input("Digite o seu CPF: ")
         while len(cpf) != 11:
             print("CPF inválido. O CPF deve conter exatamente 11 dígitos numéricos.")
             cpf = input("Digite o seu CPF: ")
-        """Validação do CPF, onde o usuário digita o número e o programa verifica se é um CPF, Sendo N = Números do CPF e D = Digito Verificador do CPF """
+
+        # Validação do CPF, onde o usuário digita o número e o programa verifica se é um CPF
+        # N = Números do CPF 
+        # D = Digito Verificador do CPF 
         n1 = int(cpf[0])
         n2 = int(cpf[1])
         n3 = int(cpf[2])
@@ -19,8 +22,9 @@ def validacao_cpf_func():
         d1 = int(cpf[9])
         d2 = int(cpf[10])
 
+        # Verificação de dígito
+        # Dígito 1
         verifd1 = ((n1 * 10 + n2 * 9 + n3 * 8 + n4 * 7 + n5 * 6 + n6 * 5 + n7 * 4 + n8 * 3 + n9 * 2) % 11)
-
         if verifd1 < 2:
             verifd1 = 0
             if verifd1 == d1:
@@ -35,7 +39,8 @@ def validacao_cpf_func():
                         print("CPF Inválido! O segundo dígito verificador está incorreto.")
             else:
                 print("CPF Inválido! O primeiro dígito verificador está incorreto.")
- 
+
+        # Dígito 2
         if verifd1 >= 2:
             verifd1 = 11 - verifd1
             if verifd1 == d1:
@@ -52,13 +57,17 @@ def validacao_cpf_func():
             else:
                 print("CPF Inválido! O primeiro dígito verificador está incorreto.")
 
-
+# Validação do Título de Eleitor do Usuário
 def validacao_tituloeleitor_func():
     teleitor = input("Digite o seu Titulo Eleitor: ")
+
     while len(teleitor) != 12:
         print("Titulo Eleitor inválido. O Titulo Eleitor deve conter exatamente 12 dígitos numéricos.")
         teleitor = input("Digite o seu Titulo Eleitor: ")
 
+    # N = Número do título
+    # E = Dígito de estado
+    # D = Dígito Verificador
     n1 = int(teleitor[0])
     n2 = int(teleitor[1])
     n3 = int(teleitor[2])
@@ -67,43 +76,72 @@ def validacao_tituloeleitor_func():
     n6 = int(teleitor[5])
     n7 = int(teleitor[6])
     n8 = int(teleitor[7])
+
     e9 = str(teleitor[8])
     e10 = str(teleitor[9])
+    
     d11 = int(teleitor[10])
     d12 = int(teleitor[11])
 
-    estado = str(e9 + e10)
-    dict = {
-        "01": "SP",
-        "02": "MG",
-        "03": "RJ",
-        "04": "RS",
-        "05": "BA",
-        "06": "PR",
-        "07": "CE",
-        "08": "PE",
-        "09": "SC",
-        "10": "GO",
-        "11": "MA",
-        "12": "PB",
-        "13": "PA",
-        "14": "ES",
-        "15": "PI",
-        "16": "RN",
-        "17": "AL",
-        "18": "MT",
-        "19": "MS",
-        "20": "DF",
-        "21": "SE",
-        "22": "AM",
-        "23": "RO",
-        "24": "AC",
-        "25": "AP",
-        "26": "RR",
-        "27": "TO",
-        "28": "ZZ",
+    estado_cod = str(e9 + e10) #Juntando os dígitos e9 e e10 em uma só string
+
+    #Dicionário para guardar sigla do estado para cada digito de estado
+    estados = {
+        "01": "SP", "02": "MG", "03": "RJ", "04": "RS",
+        "05": "BA", "06": "PR", "07": "CE", "08": "PE",
+        "09": "SC", "10": "GO", "11": "MA", "12": "PB",
+        "13": "PA", "14": "ES", "15": "PI", "16": "RN",
+        "17": "AL", "18": "MT", "19": "MS", "20": "DF",
+        "21": "SE", "22": "AM", "23": "RO", "24": "AC",
+        "25": "AP", "26": "RR", "27": "TO", "28": "ZZ",
         }
-    estado = dict[estado]
     
+    # Verificando se o estado existe na lista
+    if estado_cod not in estados: # SE o código dos estados NÃO ESTÁ no dict
+        print("Estado inválido")
+
+    estado = estados[estado_cod] # Definindo o estado para o conjunto de números recebidos
+
+        # =========================
+    # 🔢 1º Dígito Verificador
+    # =========================
+    soma1 = (
+        n1*2 + n2*3 + n3*4 + n4*5 +
+        n5*6 + n6*7 + n7*8 + n8*9
+    )
+
+    dv1 = soma1 % 11
+
+    if dv1 == 10:
+        dv1 = 0
+
+    if dv1 == 0 and estado_cod in ["01", "02"]:
+        dv1 = 1
+
+    # =========================
+    # 🔢 2º Dígito Verificador
+    # =========================
+    soma2 = (
+        int(e9)*7 +
+        int(e10)*8 +
+        dv1*9
+    )
+
+    dv2 = soma2 % 11
+
+    if dv2 == 10:
+        dv2 = 0
+
+    if dv2 == 0 and estado_cod in ["01", "02"]:
+        dv2 = 1
+
+    # =========================
+    # ✅ Validação final
+    # =========================
+    if dv1 == d11 and dv2 == d12:
+        print(f"Título válido! Estado: {estado}")
+    else:
+        print("Título inválido!")
+
 
 validacao_tituloeleitor_func()
