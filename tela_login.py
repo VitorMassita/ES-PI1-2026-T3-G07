@@ -40,8 +40,24 @@ def login_func():
 
 def cadastro_func():
     print("Para realizar o cadastro, por favor, digite o seu Nome, Sobrenome, CPF, Titulo Eleitoral.\nSua Senha será gerada automaticamente.\n")
-    estado.nome = input("Digite o seu Nome: ")
-    estado.sobrenome = input("Digite o seu Sobrenome: ")
+    estado.nome = str(input("Digite o seu Nome: "))
+    try:
+        while len(estado.nome) < 3:
+            print("Nome inválido. O nome deve conter pelo menos 3 caracteres.")
+            estado.nome = str(input("Digite o seu Nome: "))
+    except ValueError:
+        print("Nome inválido. O nome deve conter pelo menos 3 caracteres.")
+
+
+    estado.sobrenome = str(input("Digite o seu Sobrenome: "))
+    try:
+        while len(estado.sobrenome) < 3:
+            print("Sobrenome inválido. O sobrenome deve conter pelo menos 3 caracteres.")
+            estado.sobrenome = str(input("Digite o seu Sobrenome: "))
+    except ValueError:
+        print("Sobrenome inválido. O sobrenome deve conter pelo menos 3 caracteres.")
+
+
     estado.cpf = input("Digite o seu CPF: ")
     try:
         while len(estado.cpf) != 11:
@@ -50,6 +66,7 @@ def cadastro_func():
     except ValueError:
         print("CPF inválido. O CPF deve conter exatamente 11 dígitos numéricos.")
     v.validacao_cpf_func(estado.cpf)
+
 
     estado.teleitor = input("Digite o seu Titulo Eleitoral: ")
     try:
