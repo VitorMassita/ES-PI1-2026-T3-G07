@@ -43,15 +43,20 @@ def cadastro_func():
     estado.nome = input("Digite o seu Nome: ")
     estado.sobrenome = input("Digite o seu Sobrenome: ")
     estado.cpf = input("Digite o seu CPF: ")
-    match len(estado.cpf) == 11:
-        case True:
-            v.validacao_cpf_func(estado.cpf)
-        case False:
+    try:
+        while len(estado.cpf) != 11:
             print("CPF inválido. O CPF deve conter exatamente 11 dígitos numéricos.")
+            estado.cpf = input("Digite o seu CPF: ")
+    except ValueError:
+        print("CPF inválido. O CPF deve conter exatamente 11 dígitos numéricos.")
+    v.validacao_cpf_func(estado.cpf)
+
     estado.teleitor = input("Digite o seu Titulo Eleitoral: ")
-    match len(estado.teleitor) == 12:
-        case True:
-            v.validacao_tituloeleitor_func(estado.teleitor)
-        case False:
+    try:
+        while len(estado.teleitor) != 12:
             print("Titulo Eleitor inválido. O Titulo Eleitor deve conter exatamente 12 dígitos numéricos.")
+            estado.teleitor = input("Digite o seu Titulo Eleitoral: ")
+    except ValueError:
+        print("Titulo Eleitor inválido. O Titulo Eleitor deve conter exatamente 12 dígitos numéricos.")
+    v.validacao_tituloeleitor_func(estado.teleitor)
 tela_login_func()
