@@ -1,43 +1,6 @@
 import CondicoesGlobais as estado
 import Validações as v
 import DATABASE as db
-def tela_login_func():
-    print("""
-:'######::'####::'######::'########:'########:'##::::'##::::'###:::::::'########::'########::::'##::::'##::'#######::'########::::'###:::::'######:::::'###:::::'#######::
-'##... ##:. ##::'##... ##:... ##..:: ##.....:: ###::'###:::'## ##:::::: ##.... ##: ##.....::::: ##:::: ##:'##.... ##:... ##..::::'## ##:::'##... ##:::'## ##:::'##.... ##:
- ##:::..::: ##:: ##:::..::::: ##:::: ##::::::: ####'####::'##:. ##::::: ##:::: ##: ##:::::::::: ##:::: ##: ##:::: ##:::: ##:::::'##:. ##:: ##:::..:::'##:. ##:: ##:::: ##:
-. ######::: ##::. ######::::: ##:::: ######::: ## ### ##:'##:::. ##:::: ##:::: ##: ######:::::: ##:::: ##: ##:::: ##:::: ##::::'##:::. ##: ##:::::::'##:::. ##: ##:::: ##:
-:..... ##:: ##:::..... ##:::: ##:::: ##...:::: ##. #: ##: #########:::: ##:::: ##: ##...:::::::. ##:: ##:: ##:::: ##:::: ##:::: #########: ##::::::: #########: ##:::: ##:
-'##::: ##:: ##::'##::: ##:::: ##:::: ##::::::: ##:.:: ##: ##.... ##:::: ##:::: ##: ##:::::::::::. ## ##::: ##:::: ##:::: ##:::: ##.... ##: ##::: ##: ##.... ##: ##:::: ##:
-. ######::'####:. ######::::: ##:::: ########: ##:::: ##: ##:::: ##:::: ########:: ########::::::. ###::::. #######::::: ##:::: ##:::: ##:. ######:: ##:::: ##:. #######::
-:......:::....:::......::::::..:::::........::..:::::..::..:::::..:::::........:::........::::::::...::::::.......::::::..:::::..:::::..:::......:::..:::::..:::.......:::
-                                                                                                                                                                          
-                                                                                                                                                                          
-
-""")
-    
-    print("Seja bem vindo ao nosso sistema de votação!\nPara prosseguir, por favor, faça login ou o seu cadastro.\n\n1- Login\n2- Cadastro\n3- Sair\n")
-    while estado.tela_login == -1:
-        try:
-            estado.tela_login = int(input("Escolha a opção desejada: "))
-            match estado.tela_login:
-                case 1:
-                    print("Login")
-                    login_func()
-                    break
-                case 2:
-                    print("Cadastro")
-                    cadastro_func()
-                    break
-                case 3:
-                    print("Saindo...")
-                    break
-                case _:
-                    print("Opção inválida, tente novamente.")
-        except ValueError:
-            print("Entrada inválida. Digite um número.")
-def login_func():
-    print("Login")
 
 def cadastro_func():
     print("Para realizar o cadastro, por favor, digite o seu Nome, Sobrenome, CPF, Titulo Eleitoral.\nSua Senha será gerada automaticamente.\n")
@@ -79,4 +42,3 @@ def cadastro_func():
     estado.cursor.close()
     estado.connection.close()
     print("Cadastro realizado com sucesso!")
-tela_login_func()

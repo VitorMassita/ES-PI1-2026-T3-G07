@@ -371,6 +371,7 @@ def menu_eleitores_func():
             print("Entrada inválida. Digite um número.")
 
 def cadastro_func():
+    db.conecta_mysql()
     print("Para realizar o cadastro, por favor, digite o seu Nome, Sobrenome, CPF, Titulo Eleitoral.\nSua Senha será gerada automaticamente.\n")
     estado.nome = str(input("Digite o seu Nome Completo: "))
     try:
@@ -383,26 +384,29 @@ def cadastro_func():
 
     estado.cpf = input("Digite o seu CPF: ")
     try:
-        while len(estado.cpf) != 11:
-            print("CPF inválido. O CPF deve conter exatamente 11 dígitos numéricos.")
+        v.validacao_cpf_func(estado.cpf)
+        while len(estado.cpf) != 11 or estado.cpfvalido == False:
             estado.cpf = input("Digite o seu CPF: ")
+            v.validacao_cpf_func(estado.cpf)
+            break
     except ValueError:
-        print("CPF inválido. O CPF deve conter exatamente 11 dígitos numéricos.")
-    v.validacao_cpf_func(estado.cpf)
+        print("CPF inválido.")
 
 
     estado.teleitor = input("Digite o seu Titulo Eleitoral: ")
-    try:
-        while len(estado.teleitor) != 12:
-            print("Titulo Eleitor inválido. O Titulo Eleitor deve conter exatamente 12 dígitos numéricos.")
-            estado.teleitor = input("Digite o seu Titulo Eleitoral: ")
-    except ValueError:
-        print("Titulo Eleitor inválido. O Titulo Eleitor deve conter exatamente 12 dígitos numéricos.")
     v.validacao_tituloeleitor_func(estado.teleitor)
+    try:
+        while len(estado.teleitor) != 12 or estado.teleitorvalido == False:
+            estado.teleitor = input("Digite o seu Titulo Eleitoral: ")
+            v.validacao_tituloeleitor_func(estado.teleitor)
+            break
+    except ValueError:
+        print("Titulo Eleitor inválido.")
 
-    estado.senha = input("Digite a sua Senha: ")
+    v.gerador_senha_func()
+    print(f"Sua senha gerada foi: {estado.senha}")
 
-    db.conecta_mysql()
+
     estado.cadastro = "INSERT INTO eleitores (nome_ele, cpf_ele, titulo_ele, senha_ele) VALUES (%s, %s, %s, %s)"
     estado.valores = (estado.nome, estado.cpf, estado.teleitor, estado.senha)
     estado.cursor.execute(estado.cadastro, estado.valores)

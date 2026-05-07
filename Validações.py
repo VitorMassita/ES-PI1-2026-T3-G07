@@ -30,10 +30,13 @@ def validacao_cpf_func(cpf):
                 verifd2 = 11 - verifd2
                 if verifd2 == d2:
                     print("CPF Válido!")
+                    cg.cpfvalido = True
                 else:
-                    print("CPF Inválido! O segundo dígito verificador está incorreto.")
+                    print("CPF Inválido! ")
+                    cg.cpfvalido = False
         else:
-            print("CPF Inválido! O primeiro dígito verificador está incorreto.")
+            print("CPF Inválido! ")
+            cg.cpfvalido = False
 
     # Dígito 2
     if verifd1 >= 2:
@@ -46,11 +49,13 @@ def validacao_cpf_func(cpf):
                 verifd2 = 11 - verifd2
                 if verifd2 == d2:
                     print("CPF Válido!")
-                                        
+                    cg.cpfvalido = True      
                 else:
-                    print("CPF Inválido! O segundo dígito verificador está incorreto.")
+                    print("CPF Inválido!")
+                    cg.cpfvalido = False
         else:
-            print("CPF Inválido! O primeiro dígito verificador está incorreto.")
+            print("CPF Inválido!")
+            cg.cpfvalido = False
 
 # Validação do Título de Eleitor do Usuário
 def validacao_tituloeleitor_func (teleitor):
@@ -102,11 +107,30 @@ def validacao_tituloeleitor_func (teleitor):
 
     if verifd1 == d11 and verifd2 == d12:
         print(f"Título Eleitor Válido! \t Seu Estado: {cg.estado}")
+        cg.teleitorvalido = True
     else: 
-        print("Titulo de Eleitor inválido! Verifique os dígitos verificadores.")
+        print("Titulo de Eleitor inválido!")
+        cg.teleitorvalido = False
     # Verificação de dígito
-    # Aqui será feito o código de verificação 
+    # Aqui será feito o código de verificação
 
+def gerador_senha_func():
+    import random
+
+    partes = cg.nome.split()  # Separa pelo espaço
+    primeiro_nome = partes[0]
+    segundo_nome = partes[1]
+
+    # Três primeiras letras
+    letra1 = primeiro_nome[0].upper()   # 1ª letra do primeiro nome
+    letra2 = primeiro_nome[1].upper()   # 2ª letra do primeiro nome
+    letra3 = segundo_nome[0].upper()    # 1ª letra do segundo nome
+
+    # 4 números aleatórios
+    numeros = ''.join([str(random.randint(0, 9)) for _ in range(4)])
+
+    cg.senha = letra1 + letra2 + letra3 + numeros
+    
 
 
 

@@ -33,3 +33,5 @@ cadastro = 0
 senha = " "
 valores = 0
 connection = 0
+cpfvalido = True
+teleitorvalido = 0
