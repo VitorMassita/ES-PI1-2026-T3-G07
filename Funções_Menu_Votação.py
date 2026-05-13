@@ -15,13 +15,13 @@ def registrar_log(mensagem):
 def realizar_votacao_func():
     #Verificar se o sistema está aberto
     if estado.sistema_votacao_aberto == False:
-        print("Sistema de votação fechado! Você não pode votar agora.")
+        print("\nSistema de votação fechado! Você não pode votar agora.")
     else:
         #Conectando ao banco de dados
         db.conecta_mysql()
 
         #solicitar o login do eleitor - feito no cadastramento
-        cpf_eleitor = input("Digite os 4 primeiros dígitos do seu CPF para votar: ")
+        cpf_eleitor = input("\nDigite os 4 primeiros dígitos do seu CPF para votar: ")
         if len(cpf_eleitor) != 4:
             print("CPF inválido.")
             return
@@ -123,6 +123,8 @@ def realizar_votacao_func():
             #Fechando a conexão com o banco de dados
             estado.cursor.close()
             estado.connection.close()
+            import menu_principal as main
+            main.menu_principal_func()
 
 
 
@@ -159,18 +161,16 @@ def menu_votacao_func():
 def menu_auditoria_func():
     while estado.menu_votacao == 2:
         try:
-            print("\n0 - Voltar\n1 - Logs \n2 - Protocolo de Votação")
+            print("\n0 - Voltar\n1 - Exibir Logs \n2 - Deletar Logs")
             estado.menu_auditoria= int(input("Escolha a opção desejada: "))
             match estado.menu_auditoria:
                 case 0:
                     print("\nVoltando...")
                     return(menu_votacao_func())
                 case 1:
-                    print("Logs")
-
+                    print("Exibindo Logs")
                 case 2:
-                    print("Protocolo de Votação")
-                    break
+                    print("Deletando Logs")
                 case _:
                     print("Opção inválida, tente novamente.")
         except ValueError:
@@ -183,6 +183,7 @@ def menu_sistem_votacao_func():
         try:
             print("\n0 - Voltar\n1 - Comecar Votação\n2 - Fechar Sistema de Votação")
             menu_sistem_votacao= int(input("Escolha a opção desejada: "))
+            db.conecta_mysql()
             match menu_sistem_votacao:
                 case 0:
                     print("\nVoltando...")
@@ -197,12 +198,22 @@ def menu_sistem_votacao_func():
                         registrar_log("Sistema de votação aberto!")
                         print("Sistema de votação aberto com sucesso!")
                         if estado.sistema_votacao_aberto == True: 
+                            query_zere_votos = """
+                            DELETE FROM votos
+                            """
+                            estado.cursor.execute(query_zere_votos)
+                            estado.connection.commit()
                             realizar_votacao_func() 
                             break
                 case 2:
                         #Variável global de controle, para não ter erros 
                         estado.sistema_votacao_aberto = False
-
+                        query_reset = """
+                        UPDATE eleitores 
+                        SET status_ele = 0
+                        """
+                        estado.cursor.execute(query_reset)
+                        estado.connection.commit()
                         #Registrando log
                         registrar_log("Sistema de votação encerrado")
                         print("Encerrando Sistema de Votação...")
@@ -213,6 +224,10 @@ def menu_sistem_votacao_func():
                     print("Opção inválida, tente novamente.")
         except ValueError:
             print("Entrada inválida. Digite um número.")
+        finally:
+            #Fechando a conexão com o banco de dados
+            estado.cursor.close()
+            estado.connection.close()
 
 """"Menu Resultado"""
 def menu_resultado_func():

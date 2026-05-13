@@ -284,6 +284,9 @@ def menu_cadastramento_ele_func():
                 case 1:
                     print("Cadastramento de Eleitores") 
                     cadastro_func()
+                    print("\nVoltando...")
+                    import menu_principal as main
+                    return (main.menu_principal_func())
                     break
                 case _:
                     print("Opção inválida, tente novamente.")
