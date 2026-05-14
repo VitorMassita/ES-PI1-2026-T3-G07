@@ -169,6 +169,17 @@ def menu_auditoria_func():
                     return(menu_votacao_func())
                 case 1:
                     print("Exibindo Logs")
+                    try:
+                        with open("logs.txt", "r", encoding="utf-8") as arquivo:
+                            conteudo = arquivo.read()
+
+                        if conteudo == "":
+                            print("Nenhum log encontrado.")
+                        else:
+                            print("\n===== LOGS DO SISTEMA =====\n")
+                            print(conteudo)
+                    except FileNotFoundError:
+                        print("Arquivo de logs não encontrado!")
                 case 2:
                     print("Deletando Logs")
                 case _:
