@@ -181,7 +181,13 @@ def menu_auditoria_func():
                     except FileNotFoundError:
                         print("Arquivo de logs não encontrado!")
                 case 2:
-                    print("Deletando Logs")
+                    print("Deletando Logs...")
+                    with open("logs.txt", "w", encoding="utf-8") as arquivo:
+                        arquivo.write("")
+
+                    print("Logs apagados com sucesso!")
+                    import menu_principal as main
+                    return main.menu_principal_func()
                 case _:
                     print("Opção inválida, tente novamente.")
         except ValueError:
